@@ -11,6 +11,7 @@ A Promises/A+, [multi-armed bandit](http://en.wikipedia.org/wiki/Multi-armed_ban
 
 This implemention is based heavily on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do).
 
+
 ## Quick start
 
 1. Create a bandit with 3 arms
