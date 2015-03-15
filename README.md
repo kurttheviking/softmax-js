@@ -7,7 +7,7 @@ banditdb-softmax
 
 [![Build Status](https://travis-ci.org/banditdb/softmax.svg)](https://travis-ci.org/banditdb/softmax)
 
-A Promises/A+, [multi-armed bandit](http://en.wikipedia.org/wiki/Multi-armed_bandit) implemented with the softmax algorithm.
+A Promises/A+, [multi-armed bandit](http://en.wikipedia.org/wiki/Multi-armed_bandit) implemented with a softmax algorithm.
 
 This implemention is based heavily on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do).
 
