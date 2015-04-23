@@ -1,5 +1,5 @@
 {
-  "name": "banditdb-softmax",
+  "name": "softmax",
   "description": "A Promises/A+, softmax multi-armed bandit",
   "version": "0.1.5",
   "author": "kurttheviking",
