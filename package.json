@@ -1,7 +1,7 @@
 {
   "name": "softmax",
   "description": "A softmax multi-armed bandit algorithm",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "license": "ISC",
   "main": "index.js",
   "keywords": [
