@@ -64,7 +64,7 @@ The `config` object supports three parameters:
 - `gamma`: annealing factor, defaults to `1e-7` (`0.0000001`)
 - `tau`: fixed temperature, `0` to `Infinity`, higher leads to more exploration
 
-By default, `gamma` is set to `1e-7` which causes the algorithm to explore less as more information is received. In this case the underlying "temperature" is cooling &dash; the extent of random exploration shrinks with each iteration. In contrast, `tau` represents a fixed "temperature" wherein the influence of random search is constant across all iterations. If `tau` is provided then `gamma` is ignored.
+By default, `gamma` is set to `1e-7` which causes the algorithm to reduce exploration as more information is received. That is, the "temperature cools" slightly with each iteration. In contrast, `tau` represents a "constant temperature" wherein the influence of random search is fixed across all iterations. If `tau` is provided then `gamma` is ignored.
 
 Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/softmax-js#algorithmserialize) can be passed as `config`.
 
