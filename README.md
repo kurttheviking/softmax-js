@@ -37,7 +37,7 @@ Then, use the algorithm:
 
     ```js
     algorithm.select().then(function (arm) {
-      ...
+      // do something based on chosen arm value
     });
     ```
 
