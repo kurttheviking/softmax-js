@@ -3,14 +3,14 @@ softmax
 
 [![Build Status](https://travis-ci.org/kurttheviking/softmax.svg)](https://travis-ci.org/kurttheviking/softmax)
 
-**A softmax algorithm for multi-armed bandit problems**
+**A softmax multi-armed bandit algorithm**
 
-This implementation is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](https://d2w9gswcdc2jtf.cloudfront.net/research/Algorithms+for+the+multi-armed+bandit+problem.pdf).
+This implementation is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](http://www.cs.mcgill.ca/~vkules/bandits.pdf).
 
 
 ## Specification
 
-This module conforms to the [BanditLab/1.0 specification](https://github.com/banditlab/spec-js/blob/master/README.md).
+This module conforms to the [BanditLab/2.0 specification](https://github.com/banditlab/spec-js/releases).
 
 
 ## Quick start
@@ -23,7 +23,7 @@ npm install softmax --save
 
 Then, use the algorithm:
 
-1. Create an optimizer with 3 arms and default [annealing](https://en.wikipedia.org/wiki/Simulated_annealing):
+1. Create an optimizer with `3` arms and default [annealing](https://en.wikipedia.org/wiki/Simulated_annealing):
 
     ```js
     var Algorithm = require('softmax');
@@ -44,21 +44,19 @@ Then, use the algorithm:
 3. Report the reward earned from a chosen arm:
 
     ```js
-    algorithm.reward(armId, value).then(function (n) {
-      ...
-    });
+    algorithm.reward(armId, value);
     ```
 
 
 ## API
 
-#### `Algorithm([config])`
+#### `Algorithm(config)`
 
 Create a new optimization algorithm.
 
 **Arguments**
 
-- `config` (Object, Optional): algorithm instance parameters
+- `config` (Object): algorithm instance parameters
 
 The `config` object supports three parameters:
 
@@ -68,6 +66,8 @@ The `config` object supports three parameters:
 
 By default, `gamma` of 1e-7 will cause the algorithm to explore less as more information is received. In this case, the underlying "temperature" is changing. If this behavior is not desired, set `tau` to instead employ an algorithm with a fixed temperature. If `tau` is provided then `gamma` is ignored.
 
+Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/softmax-js#algorithmserialize) can be passed as `config`.
+
 **Returns**
 
 An instance of the softmax optimization algorithm.
@@ -75,19 +75,21 @@ An instance of the softmax optimization algorithm.
 **Example**
 
 ```js
-> var Algorithm = require('softmax');
-> var algorithm = new Algorithm();
-> assert.equal(algorithm.arms, 3);
-> assert.equal(algorithm.gamma, 0.0000001);
+var Algorithm = require('softmax');
+var algorithm = new Algorithm();
+
+assert.equal(algorithm.arms, 3);
+assert.equal(algorithm.gamma, 0.0000001);
 ```
 
 Or, with a passed `config`:
 
 ```js
-> var Algorithm = require('softmax');
-> var algorithm = new Algorithm({arms: 4, tau: 0.000005});
-> assert.equal(algorithm.arms, 4);
-> assert.equal(algorithm.tau, 0.000005);
+var Algorithm = require('softmax');
+var algorithm = new Algorithm({arms: 4, tau: 0.000005});
+
+assert.equal(algorithm.arms, 4);
+assert.equal(algorithm.tau, 0.000005);
 ```
 
 #### `Algorithm#select()`
@@ -105,10 +107,13 @@ A promise that resolves to a Number corresponding to the associated arm index.
 **Example**
 
 ```js
-> var Algorithm = require('softmax');
-> var algorithm = new Algorithm();
-> algorithm.select().then(function (arm) { console.log(arm); });
+var Algorithm = require('softmax');
+var algorithm = new Algorithm();
 
+algorithm.select().then(function (arm) { console.log(arm); });
+```
+
+```js
 0
 ```
 
@@ -123,16 +128,24 @@ Inform the algorithm about the payoff from a given arm.
 
 **Returns**
 
-A promise that resolves to a Number representing the count of observed rounds.
+A promise that resolves to an updated instance of the algorithm.
 
 **Example**
 
 ```js
-> var Algorithm = require('softmax');
-> var algorithm = new Algorithm();
-> algorithm.reward(0, 1).then(function (n) { console.log(n); });
+var Algorithm = require('softmax');
+var algorithm = new Algorithm();
 
-1
+algorithm.reward(0, 1).then(function (algorithmUpdated) { console.log(algorithmUpdated) });
+```
+
+```js
+<Algorithm>{
+  arms: 2,
+  gamma: 0.0000001,
+  counts: [1, 0],
+  values: [1, 0]
+}
 ```
 
 #### `Algorithm#serialize()`
@@ -150,39 +163,19 @@ A promise that resolves to an Object representing parameters required to reconst
 **Example**
 
 ```js
-> var Algorithm = require('softmax');
-> var algorithm = new Algorithm();
-> algorithm.serialize().then(function (state) { console.log(state); });
+var Algorithm = require('softmax');
+var algorithm = new Algorithm();
 
+algorithm.serialize().then(function (state) { console.log(state); });
+```
+
+```js
 {
   arms: 2,
   gamma: 0.0000001,
   counts: [0, 0],
   values: [0, 0]
 }
-```
-
-#### `Algorithm#load(state)`
-
-Restore an instance of an algorithm to a previously serialized state. This method overrides any options parameters passed at instantiation.
-
-**Arguments**
-
-- `state` (Object): a serialized algorithm state (provided from `algorithm.serialize()`)
-
-**Returns**
-
-A promise that resolves to a Number representing the count of observed rounds.
-
-**Example**
-
-```js
-> var state = {arms: 2, gamma: 0.0000001, counts: [1, 2], values: [1, 0.5]};
-> var Algorithm = require('softmax');
-> var algorithm = new Algorithm();
-> algorithm.load(state).then(function (n) { console.log(n); });
-
-3
 ```
 
 

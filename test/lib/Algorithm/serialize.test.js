@@ -5,8 +5,8 @@ var chai = require('chai');
 
 var expect = chai.expect;
 
-describe('#serialize()', function () {
-  var Algorithm = require('../../index');
+describe('Algorithm#serialize', function () {
+  var Algorithm = require('../../../index');
   var arms = _.random(1, 10);
   var config = {
     arms: arms
@@ -31,7 +31,7 @@ describe('#serialize()', function () {
     });
   });
 
-  it('returns a valid state (gamma)', function () {
+  it('returns a valid state (tau)', function () {
     var alg = new Algorithm(_.assign({ tau: tau }, config));
 
     return alg.serialize().then(function (state) {
