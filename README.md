@@ -60,11 +60,11 @@ Create a new optimization algorithm.
 
 The `config` object supports three parameters:
 
-- `arms`: (Number:Integer, Optional), default=2, the number of arms over which the optimization will operate
-- `gamma`: the annealing (cooling) factor &ndash; defaults to 1e-7 (0.0000001)
-- `tau`: the temperature (scaling) factor &ndash; 0 to Infinity, higher leads to more exploration
+- `arms`: (Number:Integer, Optional), defaults to `2`, the number of arms over which the optimization will operate
+- `gamma`: annealing factor, defaults to `1e-7` (`0.0000001`)
+- `tau`: fixed temperature, `0` to `Infinity`, higher leads to more exploration
 
-By default, `gamma` of 1e-7 will cause the algorithm to explore less as more information is received. In this case, the underlying "temperature" is changing. If this behavior is not desired, set `tau` to instead employ an algorithm with a fixed temperature. If `tau` is provided then `gamma` is ignored.
+By default, `gamma` is set to `1e-7` which causes the algorithm to explore less as more information is received. In this case the underlying "temperature" is cooling &dash; the extent of random exploration shrinks with each iteration. In contrast, `tau` represents a fixed "temperature" wherein the influence of random search is constant across all iterations. If `tau` is provided then `gamma` is ignored.
 
 Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/softmax-js#algorithmserialize) can be passed as `config`.
 
