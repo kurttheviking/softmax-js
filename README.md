@@ -1,7 +1,7 @@
 softmax
 =======
 
-[![Build Status](https://travis-ci.org/kurttheviking/softmax.svg)](https://travis-ci.org/kurttheviking/softmax)
+[![Build Status](https://travis-ci.org/kurttheviking/softmax-js.svg)](https://travis-ci.org/kurttheviking/softmax-js)
 
 **A softmax multi-armed bandit algorithm**
 
@@ -66,7 +66,7 @@ The `config` object supports three parameters:
 
 By default, `gamma` is set to `1e-7` which causes the algorithm to reduce exploration as more information is received. That is, the "temperature cools" slightly with each iteration. In contrast, `tau` represents a "constant temperature" wherein the influence of random search is fixed across all iterations. If `tau` is provided then `gamma` is ignored.
 
-Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/softmax-js#algorithmserialize) can be passed as `config`.
+Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/softmax-js-js#algorithmserialize) can be passed as `config`.
 
 **Returns**
 
@@ -198,7 +198,7 @@ npm run coverage
 
 ## Contribute
 
-PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/softmax) provides on-demand testing for commits and pull requests.
+PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/softmax-js) provides on-demand testing for commits and pull requests.
 
 
 ## Caveat emptor

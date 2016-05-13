@@ -24,12 +24,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kurttheviking/softmax.git"
+    "url": "git://github.com/kurttheviking/softmax-js.git"
   },
   "bugs": {
-    "url": "https://github.com/kurttheviking/softmax/issues"
+    "url": "https://github.com/kurttheviking/softmax-js/issues"
   },
-  "homepage": "https://github.com/kurttheviking/softmax#readme",
+  "homepage": "https://github.com/kurttheviking/softmax-js#readme",
   "dependencies": {
     "bluebird": "3.3.5",
     "debug": "2.2.0",
