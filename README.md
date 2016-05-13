@@ -44,7 +44,7 @@ Then, use the algorithm:
 3. Report the reward earned from a chosen arm:
 
     ```js
-    algorithm.reward(armId, value);
+    algorithm.reward(arm, value);
     ```
 
 
