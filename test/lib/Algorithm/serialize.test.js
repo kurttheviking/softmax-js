@@ -1,24 +1,27 @@
 /* global describe, it */
-/* eslint func-names: 0*/
-var _ = require('lodash');
-var chai = require('chai');
+/* eslint-disable global-require, import/no-extraneous-dependencies */
 
-var expect = chai.expect;
+const expect = require('chai').expect;
 
-describe('Algorithm#serialize', function () {
-  var Algorithm = require('../../../index');
-  var arms = _.random(1, 10);
-  var config = {
-    arms: arms
+const randomFloat = require('../../utils/randomFloat');
+const randomInteger = require('../../utils/randomInteger');
+
+describe('Algorithm#serialize', () => {
+  const Algorithm = require('../../../index');
+
+  const arms = randomInteger(2, 20);
+  const gamma = randomFloat(0, 1e-5);
+  const tau = randomFloat(0, 1e-5, true);
+  const config = {
+    arms
   };
-  var emptyArray = Array.apply(null, Array(arms)).map(Number.prototype.valueOf, 0);
-  var gamma = _.random(0, 1e-5, true);
-  var tau = _.random(0, 1e-5, true);
 
-  it('returns a valid state (gamma)', function () {
-    var alg = new Algorithm(_.assign({ gamma: gamma }, config));
+  const emptyArray = new Array(arms).fill(0);
 
-    return alg.serialize().then(function (state) {
+  it('returns a valid state (gamma)', () => {
+    const alg = new Algorithm(Object.assign({ gamma }, config));
+
+    return alg.serialize().then((state) => {
       expect(state).to.have.property('arms', config.arms);
       expect(state).to.have.property('gamma', gamma);
       expect(state).to.have.property('tau', null);
@@ -31,10 +34,10 @@ describe('Algorithm#serialize', function () {
     });
   });
 
-  it('returns a valid state (tau)', function () {
-    var alg = new Algorithm(_.assign({ tau: tau }, config));
+  it('returns a valid state (tau)', () => {
+    const alg = new Algorithm(Object.assign({ tau }, config));
 
-    return alg.serialize().then(function (state) {
+    return alg.serialize().then((state) => {
       expect(state).to.have.property('arms', config.arms);
       expect(state).to.have.property('gamma');  // [KE] value is irrelevant
       expect(state).to.have.property('tau', tau);
