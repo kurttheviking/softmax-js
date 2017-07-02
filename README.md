@@ -161,7 +161,7 @@ A `Promise` that resolves to a stringify-able `Object` with parameters needed to
 const Algorithm = require('softmax');
 const algorithm = new Algorithm();
 
-algorithm.serialize().then(function (state) { console.log(state); });
+algorithm.serialize().then(state => console.log(state));
 ```
 
 
