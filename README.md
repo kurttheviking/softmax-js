@@ -73,7 +73,7 @@ The `config` object supports three optional parameters:
 
 By default, `gamma` is set to `1e-7` which causes the algorithm to reduce exploration as more information is received. That is, the "temperature cools" slightly with each iteration. In contrast, `tau` represents a "constant temperature" wherein the influence of random search is fixed across all iterations. If `tau` is provided then `gamma` is ignored.
 
-Alternatively, the `state` object resolved from [`Algorithm#serialize`](https://github.com/kurttheviking/ucb-js#algorithmserialize) can be passed as `config`.
+Alternatively, the `state` object resolved from [`Algorithm#serialize`](https://github.com/kurttheviking/softmax-js#algorithmserialize) can be passed as `config`.
 
 #### Returns
 
